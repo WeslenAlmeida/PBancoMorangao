@@ -9,7 +9,6 @@ namespace PBancoMorangao
 {
     internal class PessoaPF : Pessoa
     {
-        private DateTime DataNasc { get; set; }
         private string CPF { get; set; }
         private float Renda { get; set; }
         private char Estudante { get; set; }
@@ -21,12 +20,15 @@ namespace PBancoMorangao
 
         public override string ToString()
         {
-            return "\nID: " +IdPessoa + ";\nNome: " + Nome + ";\nTelefone: " + Telefone + ";\nData de Nascimento: " + DataNasc + ";\nCPF: " + CPF +
+            return "\nID: " +IdPessoa + ";\nNome: " + Nome + ";\nTelefone: " + Telefone + ";\nData de Nascimento: " + Data + ";\nCPF: " + CPF +
                 ";\nRenda: R$" + Renda + ";\nEstudante: " + Estudante + ",";
         }
 
         private string CadastraPF(int id)
         {
+            Console.WriteLine("***************************** BANCO MORANGÃO ********************************\n");
+            Console.WriteLine("********** SOLICITAÇÃO DE ABERTURA DE CONTA CADASTRO PESSOA FÍSICA **********\n");
+
             IdPessoa = id;
 
             Console.Write("Digite seu nome: ");
@@ -36,7 +38,7 @@ namespace PBancoMorangao
             Telefone = Console.ReadLine();
 
             Console.Write("Digite sua data de nascimento: ");
-            DataNasc = DateTime.Parse(Console.ReadLine());
+            Data = DateTime.Parse(Console.ReadLine());
 
             Console.Write("Digite seu CPF: ");
             CPF = Console.ReadLine();
@@ -54,7 +56,7 @@ namespace PBancoMorangao
             return ToString();
         }
 
-        public void SolicitarAberturaPF()
+        public void SolicitaAberturaPF()
         {
             
             int id = getID();
@@ -72,8 +74,7 @@ namespace PBancoMorangao
                 arqPessoa.Close();
                 id++;
                 SaveID(id);
-               
-
+                Console.WriteLine("SOLICITAÇÃO DE ABERTURA DE CONTA REALIZADA COM SUCESSO!!!");
             }
             catch (Exception e)
             {

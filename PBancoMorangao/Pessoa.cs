@@ -12,6 +12,7 @@ namespace PBancoMorangao
         protected int IdPessoa { get; set; }
         protected string Nome { get; set; }
         protected string Telefone { get; set; }
+        protected DateTime Data { get; set; }
 
         //Método para pegar o valor do Id no arquivo
         protected int getID()

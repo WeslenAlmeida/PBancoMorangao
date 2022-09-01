@@ -7,8 +7,14 @@ namespace PBancoMorangao
     {
         static void Main(string[] args)
         {
-            PessoaPF pessoa = new();
-            pessoa.SolicitarAberturaPF();
+
+            Gerente gerente = new Gerente();
+            bool teste = gerente.Autentica(1235);
+            
+            Console.WriteLine(teste);
+
+            Atendente atendente = new Atendente();
+            atendente.AbreConta();
         }
     }
 }
