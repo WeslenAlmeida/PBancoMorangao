@@ -20,16 +20,25 @@ namespace PBancoMorangao
 
         public override string ToString()
         {
-            return "\nID: " + IdPessoa + ";\nNome: " + Nome + ";\nTelefone: " + Telefone + ";\nData de Abertura CNPJ: " + Data + ";\nRazão Social: " + Razao +
-                ";\nCNPJ: " + CNPJ + ";\nRenda: " + Renda + ";";
+            return IdPessoa + ";Conta Jurídica;Agência: "+ Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Abertura CNPJ: " + Data + ";Razão Social: " + Razao +
+                ";CNPJ: " + CNPJ + ";Renda: " + Renda + ";";
         }
 
+        public string DadosPJ()
+        {
+            return $"{IdPessoa};{Nome};{Telefone};{Data};{Razao};{CNPJ};{Renda};";
+        }
+
+        //Método para receber os dados do usuário
         public string CadastraPJ(int id)
         {
             Console.WriteLine("***************************** BANCO MORANGÃO ********************************\n");
             Console.WriteLine("********** SOLICITAÇÃO DE ABERTURA DE CONTA PESSOA JURÍDICA **********\n");
 
             IdPessoa = id;
+
+            Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
+            Agencia = Console.ReadLine();
 
             Console.Write("Digite o nome da empresa: ");
             Nome = Console.ReadLine();
@@ -52,11 +61,11 @@ namespace PBancoMorangao
             return ToString();
         }
 
+        //Solicita a abertura de conta
         public void SolicitarAberturaPJ()
         {
 
             int id = getID();
-
             string pessoaPJ = CadastraPJ(id);
 
             Endereco end = new();
@@ -65,7 +74,7 @@ namespace PBancoMorangao
             try
             {
                 //Cria o arquivo com os dados da pessoa e incrementa o contador do id
-                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\Solicitação número {id}-PJ.txt");
+                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{id}.txt");
                 arqPessoa.WriteLine(pessoaPJ + endereco);
                 arqPessoa.Close();
                 id++;

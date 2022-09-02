@@ -1,0 +1,1 @@
+31;Conta Física;Agência: 3;Nome: ada;Telefone: 16;Data de Nascimento: 12/2/1987 12:00:00 AM;CPF: de;Renda: R$200;Estudante: s;Logradouro: de;Número: de;Complemento: de;Bairro: de;CEP: de;Cidade: de;Estado: de;

@@ -23,10 +23,15 @@ namespace PBancoMorangao
         }
         public override string ToString()
         {
-            return "\nLogradouro: " + Logradouro + ";\nNúmero: " + Numero + ";\nComplemento: " + Complemento +
-              ";\nBairro: " + Bairro + ";\nCEP: " + CEP + ";\nCidade: " + Cidade + ";\nEstado: " + Estado + ";";
+            return "Logradouro: " + Logradouro + ";Número: " + Numero + ";Complemento: " + Complemento +
+              ";Bairro: " + Bairro + ";CEP: " + CEP + ";Cidade: " + Cidade + ";Estado: " + Estado + ";";
         }
 
+        public string DadosEnd()
+        {
+            return $"{Logradouro};{Numero};{Complemento};{Bairro};{CEP};{Cidade};{Estado};";
+        }
+        //Método para cadastrar os dados de endereço 
         public string CadastraEndereco(int idPessoa)
         {
             Console.Write("Digite seu logradouro: ");

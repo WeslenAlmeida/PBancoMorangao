@@ -17,19 +17,22 @@ namespace PBancoMorangao
         {
 
         }
-
         public override string ToString()
         {
-            return "\nID: " +IdPessoa + ";\nNome: " + Nome + ";\nTelefone: " + Telefone + ";\nData de Nascimento: " + Data + ";\nCPF: " + CPF +
-                ";\nRenda: R$" + Renda + ";\nEstudante: " + Estudante + ",";
+            return IdPessoa + ";Conta Física;Agência: " + Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Nascimento: " + Data + ";CPF: " + CPF +
+                ";Renda: R$" + Renda + ";Estudante: " + Estudante + ";";
         }
 
+        //Método para receber os dados do usuário
         private string CadastraPF(int id)
         {
             Console.WriteLine("***************************** BANCO MORANGÃO ********************************\n");
             Console.WriteLine("********** SOLICITAÇÃO DE ABERTURA DE CONTA CADASTRO PESSOA FÍSICA **********\n");
 
             IdPessoa = id;
+
+            Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
+            Agencia = Console.ReadLine();
 
             Console.Write("Digite seu nome: ");
             Nome = Console.ReadLine();
@@ -56,6 +59,7 @@ namespace PBancoMorangao
             return ToString();
         }
 
+        //Solicita a abertura de conta
         public void SolicitaAberturaPF()
         {
             
@@ -69,7 +73,7 @@ namespace PBancoMorangao
             try
             {
                 //Cria o arquivo com os dados da pessoa e incrementa o contador do id
-                StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\Solicitação número {id}-PF.txt");
+                StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{id}.txt");
                 arqPessoa.WriteLine(pessoaPF + endereco);
                 arqPessoa.Close();
                 id++;

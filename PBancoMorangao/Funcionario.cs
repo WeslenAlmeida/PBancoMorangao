@@ -8,10 +8,7 @@ namespace PBancoMorangao
 {
     internal class Funcionario : Pessoa
     {
-        protected string CPF { get; set; }
         protected string Cargo { get; set; }
-        protected string Salario { get; set; }
-
         public Funcionario()
         {
 
