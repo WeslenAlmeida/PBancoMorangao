@@ -71,27 +71,14 @@ namespace PBancoMorangao
             Console.WriteLine("Aprovar conta?[S/N]: ");
             string ler = Console.ReadLine().ToLower().Trim();
 
-            //Condição para abrir o tipo de conta solicitado pelo atendente
+            //Condição para aprovar a conta solicitada pelo atendente
             if (ler.Contains('s'))
             {
-                if (solicitacaoList.Contains("Tipo de conta: Conta Universitária"))
-                {
-                    //CCUniversitaria cc = new(solicita);
-                    System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
-                    arqPessoa.WriteLine($"{solicita[0]}0");
-                    arqPessoa.Close();
-                    File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}",
-                                $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{solicitacoes.First()}");
-
-                }
-                else if (solicitacaoList.Contains("Tipo de conta: Conta Normal"))
-                {
-                    Console.WriteLine("Conta Normal Criada com sucesso!!!!!!!!");
-                }
-                else
-                {
-                    Console.WriteLine("Conta VIP Criada com sucesso!!!!!!!!");
-                }
+                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
+                arqPessoa.WriteLine($"{solicita[0]}0;");
+                arqPessoa.Close();
+                File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}",
+                            $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{solicitacoes.First()}");
             }
             else
                 return;

@@ -1,0 +1,1 @@
+35;Conta Física;1;weslen;16993007575;12/2/1987;33899766600;2000;s;av b;123;esquina;vila;14800;araraquara;sp;Tipo de conta: Conta Universitária;0

@@ -17,6 +17,17 @@ namespace PBancoMorangao
         {
 
         }
+        public PessoaPJ(int id, string agencia, string nome, string telefone, DateTime data, string razao, string cnpj, float renda)
+        {
+            IdPessoa = id;
+            Agencia = agencia;
+            Nome = nome;
+            Telefone = telefone;    
+            Data = data;    
+            Razao = razao;
+            CNPJ = cnpj;
+            Renda = renda;
+        }
 
         public override string ToString()
         {

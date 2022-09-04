@@ -34,7 +34,7 @@ namespace PBancoMorangao
                 ";Renda: R$" + Renda + ";Estudante: " + Estudante + ";";
         }
 
-        private string DadosCliente()
+        private string DadosClientePF()
         {
             return $"{IdPessoa};Conta Física;{Agencia};{Nome};{Telefone};{Data.ToShortDateString()};{CPF};{Renda};{Estudante};";
         }
@@ -72,7 +72,7 @@ namespace PBancoMorangao
             else
                 Estudante = "s";
 
-            return DadosCliente();
+            return DadosClientePF();
         }
 
         //Solicita a abertura de conta

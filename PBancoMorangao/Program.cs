@@ -21,9 +21,9 @@ namespace PBancoMorangao
             //Console.WriteLine(dados[0]);
 
 
-            CCUniversitaria cc = new CCUniversitaria("33899767870");
+            CCUniversitaria cc = new CCUniversitaria("33899766600");
             Console.WriteLine(cc.ToString());
-            //Console.WriteLine(cc.Endereco.ToString()); 
+            
 
             //Console.WriteLine(cc.Saldo);
 

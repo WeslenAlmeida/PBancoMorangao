@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PBancoMorangao
 {
-    internal class CCUniversitaria : ContaCorrente
+    internal class ContaVIP : ContaCorrente
     {
-        public CCUniversitaria(string cpfCnpj)
+        public ContaVIP(string cpfCnpj)
         {
             DirectoryInfo dir = new DirectoryInfo("C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco");
             var arq = dir.GetFiles($"{cpfCnpj}.*");
@@ -34,20 +34,6 @@ namespace PBancoMorangao
             Endereco end = new(dados[9], dados[10], dados[11], dados[12], dados[13], dados[14], dados[15]);
             Saldo = float.Parse(dados[17]);
             Endereco = end;
-           
-
-        }
-
-        public override string ToString()
-        {
-            return $"{Pessoa.ToString()}{Endereco.ToString()}Saldo = {Saldo};";
-        }
-        public override void Sacar(float valor)
-        {
-            if (Saldo <  -1000)
-                Console.WriteLine("Não foi possível pois o valor do saque é maior que o limite da conta!");
-            else
-                Saldo -= valor;
         }
     }
 }
