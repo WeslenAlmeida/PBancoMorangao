@@ -20,13 +20,8 @@ namespace PBancoMorangao
 
         public override string ToString()
         {
-            return IdPessoa + ";Conta Jurídica;Agência: "+ Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Abertura CNPJ: " + Data + ";Razão Social: " + Razao +
+            return IdPessoa + ";Conta Jurídica;Agência: "+ Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Abertura CNPJ: " + Data.ToShortDateString() + ";Razão Social: " + Razao +
                 ";CNPJ: " + CNPJ + ";Renda: " + Renda + ";";
-        }
-
-        public string DadosPJ()
-        {
-            return $"{IdPessoa};{Nome};{Telefone};{Data};{Razao};{CNPJ};{Renda};";
         }
 
         //Método para receber os dados do usuário

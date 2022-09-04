@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 
 namespace PBancoMorangao
 {
@@ -7,16 +7,41 @@ namespace PBancoMorangao
     {
         static void Main(string[] args)
         {
-            //Atendente atendente = new Atendente();
+            //PessoaPF pessoaPF = new PessoaPF();
+            //pessoaPF.SolicitaAberturaPF();
+
+            //Atendente atendente = new Atendente("01");
             //atendente.AbreConta();
 
             //Gerente gerente = new Gerente();
-            //bool senha = gerente.Autentica(12345);
-            //Console.WriteLine(senha);
+            //gerente.AprovaConta();
 
-           
-            //PessoaPF pessoaPF = new PessoaPF();
-            //pessoaPF.SolicitaAberturaPF();
+            //DirectoryInfo dir = new DirectoryInfo("C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco");
+            //var dados = dir.GetFiles("33899767870.*");
+            //Console.WriteLine(dados[0]);
+
+
+            CCUniversitaria cc = new CCUniversitaria("33899767870");
+            Console.WriteLine(cc.ToString());
+            //Console.WriteLine(cc.Endereco.ToString()); 
+
+            //Console.WriteLine(cc.Saldo);
+
+            //string[] solicita = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\29.txtConta Universitária.txt");
+            //string[] dados = new string[16];
+
+
+            //foreach(string dado in solicita)
+            //    dados = dado.Split(';');
+
+
+
+
+            //Console.WriteLine(dados[15]);
+
+
+
+
         }
     }
 }

@@ -1,1 +1,0 @@
-30;Conta Física;Agência: 1;Nome: wes;Telefone: 16;Data de Nascimento: 12/2/1987 12:00:00 AM;CPF: 338;Renda: R$2000;Estudante: s;Logradouro: av b;Número: 457;Complemento: de;Bairro: de;CEP: de;Cidade: de;Estado: de;

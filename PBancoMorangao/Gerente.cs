@@ -13,6 +13,7 @@ namespace PBancoMorangao
 
         public Gerente()
         {
+            this.Nome = "Baratão";
             this.Senha = 12345;
         }
 
@@ -44,6 +45,7 @@ namespace PBancoMorangao
             else
                 Console.WriteLine($"Há {solicitacoes.Count} solicitações  pendentes!");
 
+            
 
             //Busca o arquivo no caminho definido
             string[] solicita = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
@@ -65,6 +67,7 @@ namespace PBancoMorangao
                 }
 
             }
+            Console.WriteLine(solicitacoes.First());
             Console.WriteLine("Aprovar conta?[S/N]: ");
             string ler = Console.ReadLine().ToLower().Trim();
 
@@ -73,9 +76,15 @@ namespace PBancoMorangao
             {
                 if (solicitacaoList.Contains("Tipo de conta: Conta Universitária"))
                 {
-                    Console.WriteLine("Conta Universitaria criada!!!!!!!");
+                    //CCUniversitaria cc = new(solicita);
+                    System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
+                    arqPessoa.WriteLine($"{solicita[0]}0");
+                    arqPessoa.Close();
+                    File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}",
+                                $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{solicitacoes.First()}");
+
                 }
-                else if(solicitacaoList.Contains("Tipo de conta: Conta Normal"))
+                else if (solicitacaoList.Contains("Tipo de conta: Conta Normal"))
                 {
                     Console.WriteLine("Conta Normal Criada com sucesso!!!!!!!!");
                 }
@@ -84,7 +93,8 @@ namespace PBancoMorangao
                     Console.WriteLine("Conta VIP Criada com sucesso!!!!!!!!");
                 }
             }
+            else
+                return;
         }
-
     }
 }

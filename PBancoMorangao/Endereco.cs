@@ -21,6 +21,18 @@ namespace PBancoMorangao
         {
 
         }
+
+        public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        {
+            Logradouro = logradouro;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            CEP = cep;
+            Cidade = cidade;
+            Estado = estado;
+        }
+    
         public override string ToString()
         {
             return "Logradouro: " + Logradouro + ";Número: " + Numero + ";Complemento: " + Complemento +
@@ -55,7 +67,7 @@ namespace PBancoMorangao
             Console.Write("Digite seu estado: ");
             Estado = Console.ReadLine();
 
-            return ToString();
+            return DadosEnd();
         }
     }
 

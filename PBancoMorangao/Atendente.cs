@@ -54,7 +54,7 @@ namespace PBancoMorangao
             string[] solicita = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}");
             string[] solicitacao;
 
-            List<string> solicitacaoList = new List<string>();
+            List<string> solicitacaoList = new();
 
             Console.WriteLine($"\nDados da Solicitação: ");
 
@@ -66,7 +66,7 @@ namespace PBancoMorangao
                 for(int i = 0; i < solicitacao.Length; i++)
                 {
                     Console.WriteLine(solicitacao[i]);
-                    solicitacaoList.Add(solicitacao[i]);    
+                    solicitacaoList.Add(solicitacao[i]); 
                 } 
 
             }
@@ -86,7 +86,7 @@ namespace PBancoMorangao
                         arqPessoa.WriteLine($"{solicita[0]}Tipo de conta: Conta Universitária;");
                         arqPessoa.Close();
                         File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}",
-                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}Conta Universitária.txt");
+                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
                         
                     case 2:
@@ -94,7 +94,7 @@ namespace PBancoMorangao
                         arqPessoa1.WriteLine($"{solicita[0]}Tipo de conta: Conta Normal;");
                         arqPessoa1.Close();
                         File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}",
-                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\Conta Normal.txt");
+                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
                     
                     case 3:
@@ -102,11 +102,8 @@ namespace PBancoMorangao
                         arqPessoa2.WriteLine($"{solicita[0]}Tipo de conta: Conta VIP;");
                         arqPessoa2.Close();
                         File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}",
-                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\Conta VIP.txt");
+                                    $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
-
-
-
                 }
             }
         }

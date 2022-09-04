@@ -1,1 +1,0 @@
-29;Nome: weslen;Telefone: 16;Data de Nascimento: 12/2/1987 12:00:00 AM;CPF: 338;Renda: R$2000;Estudante: s;Logradouro: ed;Número: de;Complemento: de;Bairro: de;CEP: de;Cidade: de;Estado: de;Tipo de conta: Conta Universitária;

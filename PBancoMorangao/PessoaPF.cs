@@ -11,16 +11,32 @@ namespace PBancoMorangao
     {
         private string CPF { get; set; }
         private float Renda { get; set; }
-        private char Estudante { get; set; }
-      
+        private string Estudante { get; set; }
+
         public PessoaPF()
         {
 
         }
+        public PessoaPF(int id, string nome, string agencia, string telefone, DateTime data, string cpf, float renda, string estudante)
+        {
+            IdPessoa = id;
+            Agencia = agencia;  
+            Nome = nome;
+            Telefone = telefone;
+            Data = data;
+            CPF = cpf;
+            Renda = renda;
+            Estudante = estudante;
+        }
         public override string ToString()
         {
-            return IdPessoa + ";Conta Física;Agência: " + Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Nascimento: " + Data + ";CPF: " + CPF +
+            return IdPessoa + ";Conta Física;Agência: " + Agencia + ";Nome: " + Nome + ";Telefone: " + Telefone + ";Data de Nascimento: " + Data.ToShortDateString() + ";CPF: " + CPF +
                 ";Renda: R$" + Renda + ";Estudante: " + Estudante + ";";
+        }
+
+        private string DadosCliente()
+        {
+            return $"{IdPessoa};Conta Física;{Agencia};{Nome};{Telefone};{Data.ToShortDateString()};{CPF};{Renda};{Estudante};";
         }
 
         //Método para receber os dados do usuário
@@ -52,11 +68,11 @@ namespace PBancoMorangao
             Console.Write("Estudante? S/N: ");
             string estudante = Console.ReadLine().ToLower().Trim();
             if (estudante == "s")
-                Estudante = 's';
+                Estudante ="s";
             else
-                Estudante = 'n';
+                Estudante = "s";
 
-            return ToString();
+            return DadosCliente();
         }
 
         //Solicita a abertura de conta
@@ -73,7 +89,7 @@ namespace PBancoMorangao
             try
             {
                 //Cria o arquivo com os dados da pessoa e incrementa o contador do id
-                StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{id}.txt");
+                StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{CPF}.txt");
                 arqPessoa.WriteLine(pessoaPF + endereco);
                 arqPessoa.Close();
                 id++;
