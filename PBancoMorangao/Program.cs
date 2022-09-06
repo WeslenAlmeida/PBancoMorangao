@@ -22,11 +22,10 @@ namespace PBancoMorangao
 
 
             CCUniversitaria cc = new CCUniversitaria("33899767800");
-         
-            string cpf = Console.ReadLine();
+            cc.SolicitaEmprestimo("33899767800");
 
-            float valor =float.Parse(Console.ReadLine());
-            cc.Transferir(cpf, valor);
+            Gerente gerente = new Gerente();
+            gerente.AprovaEmprestimo();
 
 
             //Console.WriteLine(cc.Saldo);

@@ -68,16 +68,47 @@ namespace PBancoMorangao
             arqPessoa.Close();
         }
 
-        public void SolicitaEmprestimo(string cpfCnpj, float valorEmprestimo)
+        //Método para solicitar empréstimo
+        public void SolicitaEmprestimo(string cpfCnpj)
         {
-            Console.WriteLine("Digite o valor do");
-            //Busca o arquivo com os dados do solicitante
-            DirectoryInfo dir = new DirectoryInfo("C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco");
-            var arq = dir.GetFiles($"{cpfCnpj}.*");
-            string[] conta = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
-            string[] dados = new string[18];
-            foreach (string dado in conta)
-                dados = dado.Split(';');
+            float valorParcela;
+
+            Console.Write("Digite o valor do empréstimo: R$");
+            float valor = float.Parse(Console.ReadLine());
+
+            Console.Write("Digite a quantidade de parcelas (máximo 36x): ");
+            int parcelas = int.Parse(Console.ReadLine());
+
+            if (parcelas > 10)
+                valorParcela = valor * 1.1f / parcelas;
+
+            else if(parcelas > 20)
+                valorParcela = valor * 1.2f / parcelas;
+
+            else if (parcelas > 30)
+                valorParcela = valor * 1.3f / parcelas;
+
+            else
+                valorParcela = valor * 1.4f / parcelas;
+
+            //Aguarda a confimação do usuário
+            Console.WriteLine($"\nO valor do empréstimo será {parcelas} parcelas de R${valorParcela:N2}");
+            Console.WriteLine("\nDESEJA ENVIAR A SOLICITAÇÃO?[S/N]: ");
+            string envia = Console.ReadLine().ToLower();
+
+            if(envia == "s")
+            {
+                //Envia os dados do solicitante e o valor para o diretório SolicitaçõesEmpréstimos para ser aprovado pelo cliente
+                string[] solicitante = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
+                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\SolicitaçõesEmpréstimos\\{cpfCnpj}.txt");
+                arqPessoa.WriteLine($"{solicitante[0]}{valor};");
+                arqPessoa.Close();
+            }
+            else
+            {
+                Console.WriteLine("Solicitação cancelada!!!!");
+            }
+           
         }
 
 
