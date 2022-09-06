@@ -40,30 +40,35 @@ namespace PBancoMorangao
             Saldo = float.Parse(dados[17]);
             Endereco = end;
         }
-        public void SacarContVIP(float valor)
+        public bool SacarContVIP(float valor)
         {   //Verifica se o saldo ficar mais que R$ -5000,00 não permite efetuar o método
             if (this.Saldo - valor < -5000)
             {
                 Console.WriteLine("Você não possui limite para realizar essa transação!");
-                return;
+                return false;
             }
             else
             {
                 Sacar(valor, this.DadoCliente);
                 Console.WriteLine("Débito/Pagamento realizado com sucesso!");
+                return true;
             }
         }
         //Método para realizar transferência 
         public void Transferir(string cpfCnpjDestino, float valorSolicitado)
         {
-            SacarContVIP(valorSolicitado);
-            Depositar(valorSolicitado, cpfCnpjDestino);
+            if (SacarContVIP(valorSolicitado))
+            {
+                Depositar(valorSolicitado, cpfCnpjDestino);
+                AddExtrato(DadoCliente, $"TRANSFERÊNCIA PARA O CPF/CNPJ {cpfCnpjDestino}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
+            }
         }
 
         //Método para realizar pagamentos
         public void RealizaPagamento(float valor)
         {
-            SacarContVIP(valor);
+            if (SacarContVIP(valor))
+                AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
         }
     }
 }

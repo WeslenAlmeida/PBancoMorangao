@@ -16,13 +16,10 @@ namespace PBancoMorangao
         public Endereco Endereco { get; set; }
         public string DadoCliente { get; set; }
 
-
         public ContaCorrente()
         {
            
         }
-       
-
         //Método para realizar depósito
         public void Depositar(float valor, string cpfCnpj)
         {
@@ -108,9 +105,36 @@ namespace PBancoMorangao
             {
                 Console.WriteLine("Solicitação cancelada!!!!");
             }
-           
         }
 
+        protected void AddExtrato(string cpfCnpj, string extrato)
+        {
+            string caminho = $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt";
 
+            string texto = $"{extrato}\n";
+
+            File.AppendAllText(caminho, texto);
+
+        }
+
+        public void GetExtrato(string cpfCnpj)
+        {
+            FileStream fs = File.OpenRead($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt");
+
+            byte[] b = new byte[1024];
+            UTF8Encoding temp = new(true);
+
+            Console.WriteLine("****************************** EXTRATO DA CONTA ***********************************");
+            Console.WriteLine($"CPF/CNPJ: {DadoCliente}");
+
+            while (fs.Read(b, 0, b.Length) > 0)
+            {
+                Console.WriteLine(temp.GetString(b));
+            }
+            Console.WriteLine("***********************************************************************************");
+            Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${Saldo:N2}");
+            Console.WriteLine("***********************************************************************************");
+            
+        }
     }
 }
