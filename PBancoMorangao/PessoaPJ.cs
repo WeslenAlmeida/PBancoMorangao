@@ -35,6 +35,11 @@ namespace PBancoMorangao
                 ";CNPJ: " + CNPJ + ";Renda: " + Renda + ";";
         }
 
+        private string DadosClientePJ()
+        {
+            return $"{IdPessoa};Conta Jurídica;{Agencia};{Nome};{Telefone};{Data.ToShortDateString()};{CNPJ};{Razao};{Renda};";
+        }
+
         //Método para receber os dados do usuário
         public string CadastraPJ(int id)
         {
@@ -64,7 +69,7 @@ namespace PBancoMorangao
             Console.Write("Informe sua renda: R$");
             Renda = float.Parse(Console.ReadLine());
 
-            return ToString();
+            return DadosClientePJ();
         }
 
         //Solicita a abertura de conta

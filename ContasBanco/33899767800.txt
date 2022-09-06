@@ -1,0 +1,1 @@
+1000;Conta Física;1;weslen;16;12/2/1987;33899767800;2000;s;av b;145;esquina;vila;14810-000;Arararquara;sp;Tipo de conta: Conta Universitária;-1000;

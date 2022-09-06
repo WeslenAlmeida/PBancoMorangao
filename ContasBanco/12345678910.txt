@@ -1,0 +1,1 @@
+1001;Conta Física;2;Davi;16993007575;7/2/2018;12345678910;5000;s;av adelaide;200;casa;Jd Europa;14800-000;Arararquara;SP;Tipo de conta: Conta Normal;1500;
