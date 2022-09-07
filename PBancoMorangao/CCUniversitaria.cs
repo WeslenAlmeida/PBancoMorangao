@@ -9,7 +9,7 @@ namespace PBancoMorangao
 {
     internal class CCUniversitaria : ContaCorrente
     {
-        
+
         public CCUniversitaria(string cpfCnpj)
         {
             //Busca o arquivo que tem o CPF/CNPJ recebido como parâmetro
@@ -40,7 +40,7 @@ namespace PBancoMorangao
             Endereco end = new(dados[9], dados[10], dados[11], dados[12], dados[13], dados[14], dados[15]);
             Saldo = float.Parse(dados[17]);
             Endereco = end;
-           
+
 
         }
 
@@ -51,7 +51,7 @@ namespace PBancoMorangao
 
         public bool SacarContUn(float valor)
         {   //Verifica se o saldo ficar mais que R$ -1000,00 não permite efetuar o método
-            if(this.Saldo - valor < -1000)
+            if (this.Saldo - valor < -1000)
             {
                 Console.WriteLine("Você não possui limite para realizar essa transação!");
                 return false;
@@ -78,6 +78,48 @@ namespace PBancoMorangao
         {
             if (SacarContUn(valor))
                 AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
+        }
+
+        public void OperacoesCaixaEletr()
+        {
+
+            int operacao = MenuCaixaEletronico();
+            switch (operacao)
+            {
+                case 1:
+                    Console.Write("Digite o valor do saque desejado: ");
+                    float saque = float.Parse(Console.ReadLine());
+                    SacarContUn(saque);
+                    break;
+
+                case 2:
+                    Console.Write("digite o valor que deseja depositar: ");
+                    float deposito = float.Parse(Console.ReadLine());
+                    Depositar(deposito, DadoCliente);
+                    break;
+
+                case 3:
+                    Console.Write("Digite o CPF do Destinatário: ");
+                    string cpf = Console.ReadLine();
+                    Console.Write("Digite o valor que deseja transferir: ");
+                    float transfere = float.Parse(Console.ReadLine());
+                    Transferir(cpf, transfere);
+                    break;
+
+                case 4:
+                    Console.WriteLine("Digite o valor do Boleto para pagamento: ");
+                    float pagamento = float.Parse(Console.ReadLine());
+                    RealizaPagamento(pagamento);
+                    break;
+
+                case 5:
+                    GetExtrato(DadoCliente);
+                    break;
+
+                case 6:
+                    SolicitaEmprestimo(DadoCliente);
+                    break;
+            }
         }
     }
 }

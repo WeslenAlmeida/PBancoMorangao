@@ -10,23 +10,9 @@ namespace PBancoMorangao
     internal class Atendente : Funcionario
     {
         //Método construtor ja define qual é o atendente conforme a agência informada
-        public Atendente(string agencia)
+        public Atendente()
         {
-            if (agencia.Contains('1'))
-            {
-                Nome = "Louise";
-                Cargo = "Atendente";
-            }
-            else if (agencia.Contains('2'))
-            {
-                Nome = "Thalya";
-                Cargo = "Atendente";
-            }
-            else if (agencia.Contains('3'))
-            {
-                Nome = "Weslen";
-                Cargo = "Atendente";
-            }
+           
         }
 
         public void AbreConta()
@@ -88,7 +74,7 @@ namespace PBancoMorangao
                         File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}",
                                     $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
-                        
+
                     case 2:
                         System.IO.StreamWriter arqPessoa1 = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}");
                         arqPessoa1.WriteLine($"{solicita[0]}Tipo de conta: Conta Normal;");
@@ -96,7 +82,7 @@ namespace PBancoMorangao
                         File.Move($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}",
                                     $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
-                    
+
                     case 3:
                         System.IO.StreamWriter arqPessoa2 = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{solicitacoes.First()}");
                         arqPessoa2.WriteLine($"{solicita[0]}Tipo de conta: Conta VIP;");
@@ -105,7 +91,11 @@ namespace PBancoMorangao
                                     $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\AguarAprov\\{solicitacoes.First()}");
                         break;
                 }
+                Console.WriteLine("AGUARDE APROVAÇÃO DO GERENTE!!!");
+                return;
             }
+            else
+                return;
         }
     }
 }

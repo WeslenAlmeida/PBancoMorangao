@@ -85,7 +85,7 @@ namespace PBancoMorangao
             try
             {
                 //Cria o arquivo com os dados da pessoa e incrementa o contador do id
-                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{id}.txt");
+                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Solicitações\\{CNPJ}.txt");
                 arqPessoa.WriteLine(pessoaPJ + endereco);
                 arqPessoa.Close();
                 id++;

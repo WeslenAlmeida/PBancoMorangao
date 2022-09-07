@@ -9,12 +9,11 @@ namespace PBancoMorangao
 {
     internal class Gerente : Funcionario
     {
-        private int Senha { get; set; }
+        public int Senha { get; set; }
 
         public Gerente()
         {
-            this.Nome = "Baratão";
-            this.Senha = 12345;
+            
         }
 
         //Método para Verificar a senha do Gerente

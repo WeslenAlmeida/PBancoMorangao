@@ -18,7 +18,7 @@ namespace PBancoMorangao
 
         public ContaCorrente()
         {
-           
+
         }
         //Método para realizar depósito
         public void Depositar(float valor, string cpfCnpj)
@@ -79,7 +79,7 @@ namespace PBancoMorangao
             if (parcelas > 10)
                 valorParcela = valor * 1.1f / parcelas;
 
-            else if(parcelas > 20)
+            else if (parcelas > 20)
                 valorParcela = valor * 1.2f / parcelas;
 
             else if (parcelas > 30)
@@ -93,7 +93,7 @@ namespace PBancoMorangao
             Console.WriteLine("\nDESEJA ENVIAR A SOLICITAÇÃO?[S/N]: ");
             string envia = Console.ReadLine().ToLower();
 
-            if(envia == "s")
+            if (envia == "s")
             {
                 //Envia os dados do solicitante e o valor para o diretório SolicitaçõesEmpréstimos para ser aprovado pelo cliente
                 string[] solicitante = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
@@ -119,22 +119,50 @@ namespace PBancoMorangao
 
         public void GetExtrato(string cpfCnpj)
         {
-            FileStream fs = File.OpenRead($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt");
-
-            byte[] b = new byte[1024];
-            UTF8Encoding temp = new(true);
-
-            Console.WriteLine("****************************** EXTRATO DA CONTA ***********************************");
-            Console.WriteLine($"CPF/CNPJ: {DadoCliente}");
-
-            while (fs.Read(b, 0, b.Length) > 0)
+            try 
             {
-                Console.WriteLine(temp.GetString(b));
+                FileStream fs = File.OpenRead($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt");
+                byte[] b = new byte[1024];
+                UTF8Encoding temp = new(true);
+
+                Console.WriteLine("****************************** EXTRATO DA CONTA ***********************************");
+                Console.WriteLine($"CPF/CNPJ: {DadoCliente}");
+
+                while (fs.Read(b, 0, b.Length) > 0)
+                {
+                    Console.WriteLine(temp.GetString(b));
+                }
+                Console.WriteLine("***********************************************************************************");
+                Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${Saldo:N2}");
+                Console.WriteLine("***********************************************************************************");
             }
-            Console.WriteLine("***********************************************************************************");
-            Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${Saldo:N2}");
-            Console.WriteLine("***********************************************************************************");
-            
+            catch (Exception)
+            {
+                Console.WriteLine("Não existe extrato para o cliente solicitado!!");
+                Console.WriteLine("Pressione Enter para continuar!");
+                Console.ReadKey();
+                return;
+            }
+        }
+        protected int MenuCaixaEletronico()
+        {
+            int opc;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("**** MENU CAIXA ELETRÔNICO *****");
+                Console.WriteLine("1 - Realizar Saque ");
+                Console.WriteLine("2 - Realizar Depósito");
+                Console.WriteLine("3 - Realizar Tranferência");
+                Console.WriteLine("4 - Realizar Pagamentos");
+                Console.WriteLine("5 - Consultar Extrato");
+                Console.WriteLine("6 - Solicitar Empréstimo");
+                Console.WriteLine("0 - Sair");
+                Console.Write("Opção: ");
+                opc = int.Parse(Console.ReadLine());
+                return opc;
+
+            } while (opc != 0);
         }
     }
 }

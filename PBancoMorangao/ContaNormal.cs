@@ -68,5 +68,46 @@ namespace PBancoMorangao
             if(SacarContNorm(valor))
                 AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
         }
+        public void OperacoesCaixaEletr()
+        {
+
+            int operacao = MenuCaixaEletronico();
+            switch (operacao)
+            {
+                case 1:
+                    Console.Write("Digite o valor do saque desejado: ");
+                    float saque = float.Parse(Console.ReadLine());
+                    SacarContNorm(saque);
+                    break;
+
+                case 2:
+                    Console.Write("digite o valor que deseja depositar: ");
+                    float deposito = float.Parse(Console.ReadLine());
+                    Depositar(deposito, DadoCliente);
+                    break;
+
+                case 3:
+                    Console.Write("Digite o CPF do Destinatário: ");
+                    string cpf = Console.ReadLine();
+                    Console.Write("Digite o valor que deseja transferir: ");
+                    float transfere = float.Parse(Console.ReadLine());
+                    Transferir(cpf, transfere);
+                    break;
+
+                case 4:
+                    Console.WriteLine("Digite o valor do Boleto para pagamento: ");
+                    float pagamento = float.Parse(Console.ReadLine());
+                    RealizaPagamento(pagamento);
+                    break;
+
+                case 5:
+                    GetExtrato(DadoCliente);
+                    break;
+
+                case 6:
+                    SolicitaEmprestimo(DadoCliente);
+                    break;
+            }
+        }
     }
 }

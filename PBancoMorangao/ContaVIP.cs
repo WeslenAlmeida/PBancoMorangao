@@ -9,6 +9,7 @@ namespace PBancoMorangao
 {
     internal class ContaVIP : ContaCorrente
     {
+       
         public ContaVIP(string cpfCnpj)
         {
             //Busca o arquivo que tem o CPF/CNPJ recebido como parâmetro
@@ -34,6 +35,7 @@ namespace PBancoMorangao
                 Empresa = empresa;
                 Numconta = int.Parse(dados[0]);
                 DadoCliente = dados[6];
+                
             }
             //Cria o objeto do tipo endereço com os dados do arquivo
             Endereco end = new(dados[9], dados[10], dados[11], dados[12], dados[13], dados[14], dados[15]);
@@ -69,6 +71,47 @@ namespace PBancoMorangao
         {
             if (SacarContVIP(valor))
                 AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
+        }
+        public void OperacoesCaixaEletr()
+        {
+            Console.WriteLine($"Nome do atendente: ");
+            int operacao = MenuCaixaEletronico();
+            switch (operacao)
+            {
+                case 1:
+                    Console.Write("Digite o valor do saque desejado: ");
+                    float saque = float.Parse(Console.ReadLine());
+                    SacarContVIP(saque);
+                    break;
+
+                case 2:
+                    Console.Write("digite o valor que deseja depositar: ");
+                    float deposito = float.Parse(Console.ReadLine());
+                    Depositar(deposito, DadoCliente);
+                    break;
+
+                case 3:
+                    Console.Write("Digite o CPF do Destinatário: ");
+                    string cpf = Console.ReadLine();
+                    Console.Write("Digite o valor que deseja transferir: ");
+                    float transfere = float.Parse(Console.ReadLine());
+                    Transferir(cpf, transfere);
+                    break;
+
+                case 4:
+                    Console.WriteLine("Digite o valor do Boleto para pagamento: ");
+                    float pagamento = float.Parse(Console.ReadLine());
+                    RealizaPagamento(pagamento);
+                    break;
+
+                case 5:
+                    GetExtrato(DadoCliente);
+                    break;
+
+                case 6:
+                    SolicitaEmprestimo(DadoCliente);
+                    break;
+            }
         }
     }
 }
