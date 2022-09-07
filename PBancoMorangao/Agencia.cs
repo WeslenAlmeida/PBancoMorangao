@@ -8,13 +8,15 @@ namespace PBancoMorangao
 {
     internal class Agencia
     {
-        public int NumAgencia { get; set; }
+        public string NumAgencia { get; set; }
         public Endereco End { get; set; }
         public Atendente Atendente { get; set; }
         public Gerente Gerente { get; set; }
 
         public Agencia(string numAgencia, int funcionario)
         {
+            NumAgencia = numAgencia;
+
             if (numAgencia == "1")
             {
                 if(funcionario == 1)

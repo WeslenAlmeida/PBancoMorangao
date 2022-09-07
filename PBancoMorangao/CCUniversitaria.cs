@@ -89,13 +89,22 @@ namespace PBancoMorangao
                 case 1:
                     Console.Write("Digite o valor do saque desejado: ");
                     float saque = float.Parse(Console.ReadLine());
-                    SacarContUn(saque);
+                    if (SacarContUn(saque))
+                        AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
                     break;
 
                 case 2:
                     Console.Write("digite o valor que deseja depositar: ");
                     float deposito = float.Parse(Console.ReadLine());
-                    Depositar(deposito, DadoCliente);
+                    try
+                    {
+                        Depositar(deposito, DadoCliente);
+                        AddExtrato(DadoCliente, $"DEPÓSITO EM CONTA: {DateTime.Now} ---------- R${deposito:N2}");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Não foi possível realizar o depósito na conta CPF/CNPJ: {DadoCliente}");
+                    }
                     break;
 
                 case 3:
