@@ -24,7 +24,8 @@ namespace PBancoMorangao
             {
                 PessoaPF pessoa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], float.Parse(dados[7]), (dados[8]));
                 Pessoa = pessoa;
-                Numconta = int.Parse(dados[0]); 
+                Numconta = int.Parse(dados[0]);
+                DadoCliente = dados[6]; 
             }
             //Senão cria um objeto do tipo PJ com os dados do arquivo
             else
@@ -32,6 +33,7 @@ namespace PBancoMorangao
                 PessoaPJ empresa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], dados[7], float.Parse((dados[8])));
                 Empresa = empresa;
                 Numconta = int.Parse(dados[0]);
+                DadoCliente = dados[6];
             }
             //Cria o objeto do tipo endereço com os dados do arquivo
             Endereco end = new(dados[9], dados[10], dados[11], dados[12], dados[13], dados[14], dados[15]);
@@ -43,12 +45,16 @@ namespace PBancoMorangao
             if (this.Saldo - valor < -3000)
             {
                 Console.WriteLine("Você não possui limite para realizar essa transação!");
+                Console.ReadKey();
                 return false;
+                
             }
             else
             {
                 Sacar(valor, this.DadoCliente);
                 Console.WriteLine("Débito/Pagamento realizado com sucesso!");
+                Console.WriteLine("\nSaque realizado com sucesso!!!\n Tecle Enter para continuar... ");
+                Console.ReadKey();
                 return true;
             }
         }
@@ -59,63 +65,94 @@ namespace PBancoMorangao
             {
                 Depositar(valorSolicitado, cpfCnpjDestino);
                 AddExtrato(DadoCliente, $"TRANSFERÊNCIA PARA O CPF/CNPJ {cpfCnpjDestino}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
+                Console.WriteLine("\nTransferência realizada com sucesso!!!\n Tecle Enter para continuar... ");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Não foi possível realizar a transação!");
+                Console.WriteLine("\n Tecle Enter para continuar... ");
+                Console.ReadKey();
             }
         }
 
         //Método para realizar pagamentos
         public void RealizaPagamento(float valor)
         {
-            if(SacarContNorm(valor))
+            if (SacarContNorm(valor))
+            {
                 AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
+                Console.WriteLine("\nPagamento realizado com sucesso!!!\n Tecle Enter para continuar... ");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Não foi possível realizar a transação!");
+                Console.WriteLine("\n Tecle Enter para continuar... ");
+                Console.ReadKey();
+            }
+               
         }
+
+        //Método para realizar as operações da conta
         public void OperacoesCaixaEletr()
         {
-
-            int operacao = MenuCaixaEletronico();
-            switch (operacao)
+            int operacao;
+            do
             {
-                case 1:
-                    float saque = float.Parse(Console.ReadLine());
-                    if (SacarContNorm(saque))
-                        AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
-                    break;
+                operacao = MenuCaixaEletronico();
+                switch (operacao)
+                {
+                    case 1:
+                        Console.Write("Digite o valor que deseja sacar: R$");
+                        float saque = float.Parse(Console.ReadLine());
+                        if (SacarContNorm(saque))
+                            AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
+                        break;
 
-                case 2:
-                    Console.Write("digite o valor que deseja depositar: ");
-                    float deposito = float.Parse(Console.ReadLine());
-                    try
-                    {
-                        Depositar(deposito, DadoCliente);
-                        AddExtrato(DadoCliente, $"DEPÓSITO EM CONTA: {DateTime.Now} ---------- R${deposito:N2}");
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine($"Não foi possível realizar o depósito na conta CPF/CNPJ: {DadoCliente}");
-                    }
-                    break;
+                    case 2:
+                        Console.Write("digite o valor que deseja depositar: R$");
+                        float deposito = float.Parse(Console.ReadLine());
+                        try
+                        {
+                            Depositar(deposito, DadoCliente);
+                            AddExtrato(DadoCliente, $"DEPÓSITO EM CONTA: {DateTime.Now} ---------- R${deposito:N2}");
+                            Console.WriteLine("\nDepósito realizado com sucesso!!!\n Tecle Enter para continuar... ");
+                            Console.ReadKey();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"Não foi possível realizar o depósito na conta CPF/CNPJ: {DadoCliente}\nErro: {e.Message}");
+                            Console.ReadKey();
+                        }
+                        break;
 
-                case 3:
-                    Console.Write("Digite o CPF do Destinatário: ");
-                    string cpf = Console.ReadLine();
-                    Console.Write("Digite o valor que deseja transferir: ");
-                    float transfere = float.Parse(Console.ReadLine());
-                    Transferir(cpf, transfere);
-                    break;
+                    case 3:
+                        Console.Write("Digite o CPF do Destinatário: ");
+                        string cpf = Console.ReadLine();
+                        Console.Write("Digite o valor que deseja transferir: R$");
+                        float transfere = float.Parse(Console.ReadLine());
+                        Transferir(cpf, transfere);
+                        break;
 
-                case 4:
-                    Console.WriteLine("Digite o valor do Boleto para pagamento: ");
-                    float pagamento = float.Parse(Console.ReadLine());
-                    RealizaPagamento(pagamento);
-                    break;
+                    case 4:
+                        Console.WriteLine("Digite o valor do Boleto para pagamento: R$");
+                        float pagamento = float.Parse(Console.ReadLine());
+                        RealizaPagamento(pagamento);
+                        break;
 
-                case 5:
-                    GetExtrato(DadoCliente);
-                    break;
+                    case 5:
+                        GetExtrato(DadoCliente);
+                        break;
 
-                case 6:
-                    SolicitaEmprestimo(DadoCliente);
-                    break;
-            }
+                    case 6:
+                        SolicitaEmprestimo(DadoCliente);
+                        break;
+
+                    default:
+                        break;
+                }
+            } while (operacao != 0);
         }
     }
 }

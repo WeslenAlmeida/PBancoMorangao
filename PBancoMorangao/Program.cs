@@ -10,6 +10,8 @@ namespace PBancoMorangao
         {
             MenuPrincipal();
         }
+
+        //Menu principal do banco
         static void MenuPrincipal()
         {
             int opcMenu;
@@ -38,17 +40,14 @@ namespace PBancoMorangao
                         break;
 
                     case 2:
-                        Console.WriteLine(" ♦ Digite [s] - Operações da Conta / [n] - Retornar para o Menu Principal");
-                        opc = char.Parse(Console.ReadLine());
-
-                        if (opc == 's')
-                            Conta();
+                        Console.WriteLine("Operações da Conta");
+                        Conta();
                        
                         break;
 
                     case 3:
                         int funcopc;
-                        Console.WriteLine(" ♦ Digite [1] - Atendente / [2] - Gerente");
+                        Console.WriteLine("Digite [1] - Atendente / [2] - Gerente");
                         funcopc = int.Parse(Console.ReadLine());
                         Console.Clear();
 
@@ -63,6 +62,7 @@ namespace PBancoMorangao
             } while (opcMenu != 0);
             Console.WriteLine("********** FIM **********");
 
+            //Cria um novo cliente
             static void NovoCliente()
             {
                 Console.Write("\nSOLICITAÇÃO DE CADASTRO:");
@@ -70,6 +70,7 @@ namespace PBancoMorangao
                 Console.Write("\nEscolha a opção: [Pessoa fisica: 1]  [Pessoa Juridica: 2]: ");
                 int opc = int.Parse(Console.ReadLine());
                 Console.WriteLine();
+                //Cadastra a pessoa física
                 if (opc == 1)
                 {
                     Console.WriteLine("CADASTRO PESSOA FÍSICA: ");
@@ -80,6 +81,7 @@ namespace PBancoMorangao
                     Console.ReadKey();
                     Console.Clear();
                 }
+                //Cadastra a pessoa jurídica
                 else
                 {
                     Console.WriteLine("CADASTRO PESSOA JURIDICA: ");
@@ -93,34 +95,47 @@ namespace PBancoMorangao
                     MenuPrincipal();
                 }
             }
+            //Acessa a conta já existente
             static void Conta()
             {
-                Console.WriteLine("Digite seu CPF ou CNPJ");
-                string cpfCnpj = Console.ReadLine();
-                string[] solicita = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
-                string[] dados = new string[18];
+                try
+                {
+                    Console.WriteLine("Digite seu CPF ou CNPJ");
+                    string cpfCnpj = Console.ReadLine();
+                    string[] solicita = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
+                    string[] dados = new string[18];
 
-                foreach (string dado in solicita)
-                    dados = dado.Split(';');
+                    foreach (string dado in solicita)
+                        dados = dado.Split(';');
 
-                if (dados[16].Contains("Conta Normal;"))
+                    //Acessa a conta normal
+                    if (dados[16].Contains("Normal"))
+                    {
+                        ContaNormal conta = new(cpfCnpj);
+                        conta.OperacoesCaixaEletr();
+                        return;
+                    }
+                    //Acessa a conta VIP
+                    else if (dados[16].Contains("VIP"))
+                    {
+                        ContaVIP conta = new(cpfCnpj);
+                        conta.OperacoesCaixaEletr();
+                        return;
+                    }
+                    //Acessa a conta Universitária
+                    else if (dados[16].Contains("Universitária"))
+                    {
+                        CCUniversitaria conta = new(cpfCnpj);
+                        conta.OperacoesCaixaEletr();
+                        return;
+                    }
+                }catch(Exception e)
                 {
-                    ContaNormal conta = new(cpfCnpj);
-                    conta.OperacoesCaixaEletr();
-                    return;
+                    Console.WriteLine($"Nao foi possível encontrar a conta solicitada!!!!\nErro: {e.Message}");
+                    Console.WriteLine("\n Tecle Enter para continuar... ");
+                    Console.ReadKey();
                 }
-                else if (dados[16].Contains("Conta VIP;"))
-                {
-                    ContaVIP conta = new(cpfCnpj);
-                    conta.OperacoesCaixaEletr();
-                    return;
-                }
-                else
-                {
-                    CCUniversitaria conta = new(cpfCnpj);
-                    conta.OperacoesCaixaEletr();
-                    return;
-                }
+               
             }
         }
     }

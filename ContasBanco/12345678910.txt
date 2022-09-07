@@ -1,0 +1,1 @@
+1005;Conta Física;3;davi;216;12/2/1987;12345678910;5000;s;av b;456;esquina;vila;14800;araraaq;sp;Tipo de conta: Conta Universitária;-1000;

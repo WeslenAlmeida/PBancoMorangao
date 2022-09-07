@@ -124,7 +124,6 @@ namespace PBancoMorangao
                 }
 
             }
-            Console.WriteLine(solicitacoes.First());
             Console.WriteLine("Aprovar empréstimo?[S/N]: ");
             string ler = Console.ReadLine().ToLower().Trim();
 

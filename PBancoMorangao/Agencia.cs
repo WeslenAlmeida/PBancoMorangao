@@ -13,6 +13,11 @@ namespace PBancoMorangao
         public Atendente Atendente { get; set; }
         public Gerente Gerente { get; set; }
 
+        /* O parâmetro recebido pelo método construtor
+         * busca o Gerente e o Atendente da sua respectiva
+         * agência
+         */
+
         public Agencia(string numAgencia, int funcionario)
         {
             NumAgencia = numAgencia;

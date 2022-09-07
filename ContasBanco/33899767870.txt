@@ -1,1 +1,0 @@
-1002;Conta Física;1;weslen;16993007575;12/2/1987;33899767870;2000;s;av b;157;esquina;vila xavier;14800000;araraquara;sp;Tipo de conta: Conta Normal;0;

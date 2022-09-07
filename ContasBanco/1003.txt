@@ -1,1 +1,0 @@
-1003;Conta Jurídica;1;DAVI ME;1699000000;11/7/2003;18514860000109;davi me;5000;av c;457;esquina;vila xavier;14800000;araraquara;sp;Tipo de conta: Conta VIP;0;

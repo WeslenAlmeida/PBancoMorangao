@@ -95,18 +95,31 @@ namespace PBancoMorangao
 
             if (envia == "s")
             {
-                //Envia os dados do solicitante e o valor para o diretório SolicitaçõesEmpréstimos para ser aprovado pelo cliente
-                string[] solicitante = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
-                System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\SolicitaçõesEmpréstimos\\{cpfCnpj}.txt");
-                arqPessoa.WriteLine($"{solicitante[0]}{valor};");
-                arqPessoa.Close();
+                try
+                {
+                    //Envia os dados do solicitante e o valor para o diretório SolicitaçõesEmpréstimos para ser aprovado pelo cliente
+                    string[] solicitante = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
+                    System.IO.StreamWriter arqPessoa = new StreamWriter($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\SolicitaçõesEmpréstimos\\{cpfCnpj}.txt");
+                    arqPessoa.WriteLine($"{solicitante[0]}{valor};");
+                    arqPessoa.Close();
+                    Console.WriteLine("Solicitação enviada com sucesso!!!");
+
+                    
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine($"Não foi possível realizar a solicitação!!!\nErro: {e.Message}");
+                }
             }
             else
             {
                 Console.WriteLine("Solicitação cancelada!!!!");
             }
+            Console.WriteLine("\nTecle Enter para continuar...");
+            Console.ReadKey();
         }
 
+        //Adiciona no arquivo extrato da operação de conta realizada pelo cliente
         protected void AddExtrato(string cpfCnpj, string extrato)
         {
             string caminho = $"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt";
@@ -117,6 +130,7 @@ namespace PBancoMorangao
 
         }
 
+        //Imprime o extrato do cliente na tela
         public void GetExtrato(string cpfCnpj)
         {
             try 
@@ -135,15 +149,17 @@ namespace PBancoMorangao
                 Console.WriteLine("***********************************************************************************");
                 Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${Saldo:N2}");
                 Console.WriteLine("***********************************************************************************");
+                fs.Close();
             }
             catch (Exception)
             {
                 Console.WriteLine("Não existe extrato para o cliente solicitado!!");
-                Console.WriteLine("Pressione Enter para continuar!");
-                Console.ReadKey();
                 return;
             }
+            Console.WriteLine("\n Tecle Enter para continuar... ");
+            Console.ReadKey();  
         }
+        //Menu de operações da conta
         protected int MenuCaixaEletronico()
         {
             int opc;
