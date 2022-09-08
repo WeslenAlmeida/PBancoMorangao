@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PBancoMorangao
@@ -135,19 +136,27 @@ namespace PBancoMorangao
         {
             try 
             {
+                string[] conta = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\ContasBanco\\{cpfCnpj}.txt");
+                string[] dados = new string[18];
+                foreach (string dado in conta)
+                    dados = dado.Split(';');
+
                 FileStream fs = File.OpenRead($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\Extratos\\{cpfCnpj}.txt");
                 byte[] b = new byte[1024];
                 UTF8Encoding temp = new(true);
 
                 Console.WriteLine("****************************** EXTRATO DA CONTA ***********************************");
-                Console.WriteLine($"CPF/CNPJ: {DadoCliente}");
+                Console.WriteLine($"\nCPF/CNPJ: {DadoCliente}");
+                Console.WriteLine($"Nome: {dados[3]}\n");
+                
 
                 while (fs.Read(b, 0, b.Length) > 0)
                 {
                     Console.WriteLine(temp.GetString(b));
                 }
+
                 Console.WriteLine("***********************************************************************************");
-                Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${Saldo:N2}");
+                Console.WriteLine($"\nSALDO ATUAL DA CONTA: R${dados[17]:N2}");
                 Console.WriteLine("***********************************************************************************");
                 fs.Close();
             }
@@ -175,7 +184,12 @@ namespace PBancoMorangao
                 Console.WriteLine("6 - Solicitar Empréstimo");
                 Console.WriteLine("0 - Sair");
                 Console.Write("Opção: ");
-                opc = int.Parse(Console.ReadLine());
+                while (!int.TryParse(Console.ReadLine(), out opc))
+                {
+                    Console.WriteLine("Digite somente números!");
+                    Thread.Sleep(2000);
+                }
+                   
                 return opc;
 
             } while (opc != 0);

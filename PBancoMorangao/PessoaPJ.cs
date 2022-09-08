@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PBancoMorangao
@@ -47,9 +48,17 @@ namespace PBancoMorangao
             Console.WriteLine("********** SOLICITAÇÃO DE ABERTURA DE CONTA PESSOA JURÍDICA **********\n");
 
             IdPessoa = id;
-
-            Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
-            Agencia = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
+                Agencia = Console.ReadLine();
+                if (Agencia != "1" && Agencia != "2" && Agencia != "3")
+                {
+                    Console.WriteLine("Agencia inválida!");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                }
+            } while (Agencia != "1" && Agencia != "2" && Agencia != "3");
 
             Console.Write("Digite o nome da empresa: ");
             Nome = Console.ReadLine();
@@ -58,7 +67,10 @@ namespace PBancoMorangao
             Telefone = Console.ReadLine();
 
             Console.Write("Digite sua data de abertura da empresa: ");
-            Data = DateTime.Parse(Console.ReadLine());
+            DateTime data;
+            while (!DateTime.TryParse(Console.ReadLine(), out data))
+                Console.WriteLine("Formato de data incorreto!");
+            Data = data;
 
             Console.Write("Digite a Razão Social: ");
             Razao = Console.ReadLine();
@@ -67,7 +79,10 @@ namespace PBancoMorangao
             CNPJ = Console.ReadLine();
 
             Console.Write("Informe sua renda: R$");
-            Renda = float.Parse(Console.ReadLine());
+            float renda;
+            while (!float.TryParse(Console.ReadLine(), out renda))
+                Console.WriteLine("Digite somente números!");
+            Renda = renda;
 
             return DadosClientePJ();
         }
@@ -80,7 +95,7 @@ namespace PBancoMorangao
             string pessoaPJ = CadastraPJ(id);
 
             Endereco end = new();
-            string endereco = end.CadastraEndereco(id);
+            string endereco = end.CadastraEndereco();
 
             try
             {

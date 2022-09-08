@@ -65,6 +65,7 @@ namespace PBancoMorangao
             {
                 Depositar(valorSolicitado, cpfCnpjDestino);
                 AddExtrato(DadoCliente, $"TRANSFERÊNCIA PARA O CPF/CNPJ {cpfCnpjDestino}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
+                AddExtrato(cpfCnpjDestino, $"TRANSFERÊNCIA RECEBIDA DO CPF/CNPJ {DadoCliente}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
                 Console.WriteLine("\nTransferência realizada com sucesso!!!\n Tecle Enter para continuar... ");
                 Console.ReadKey();
             }
@@ -105,14 +106,18 @@ namespace PBancoMorangao
                 {
                     case 1:
                         Console.Write("Digite o valor que deseja sacar: R$");
-                        float saque = float.Parse(Console.ReadLine());
+                        float saque;
+                        while (!float.TryParse(Console.ReadLine(), out saque))
+                            Console.WriteLine("Digite somente números!");
                         if (SacarContNorm(saque))
                             AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
                         break;
 
                     case 2:
                         Console.Write("digite o valor que deseja depositar: R$");
-                        float deposito = float.Parse(Console.ReadLine());
+                        float deposito;
+                        while (!float.TryParse(Console.ReadLine(), out deposito))
+                            Console.WriteLine("Digite somente números!");
                         try
                         {
                             Depositar(deposito, DadoCliente);
@@ -131,13 +136,17 @@ namespace PBancoMorangao
                         Console.Write("Digite o CPF do Destinatário: ");
                         string cpf = Console.ReadLine();
                         Console.Write("Digite o valor que deseja transferir: R$");
-                        float transfere = float.Parse(Console.ReadLine());
+                        float transfere;
+                        while (!float.TryParse(Console.ReadLine(), out transfere))
+                            Console.WriteLine("Digite somente números!");
                         Transferir(cpf, transfere);
                         break;
 
                     case 4:
                         Console.WriteLine("Digite o valor do Boleto para pagamento: R$");
-                        float pagamento = float.Parse(Console.ReadLine());
+                        float pagamento;
+                        while (!float.TryParse(Console.ReadLine(), out pagamento))
+                            Console.WriteLine("Digite somente números!");
                         RealizaPagamento(pagamento);
                         break;
 

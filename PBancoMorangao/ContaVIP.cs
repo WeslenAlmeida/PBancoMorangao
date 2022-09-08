@@ -63,6 +63,7 @@ namespace PBancoMorangao
             {
                 Console.WriteLine("Transferência Realizada com sucesso!");
                 AddExtrato(DadoCliente, $"TRANSFERÊNCIA PARA O CPF/CNPJ {cpfCnpjDestino}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
+                AddExtrato(cpfCnpjDestino, $"TRANSFERÊNCIA RECEBIDA DO CPF/CNPJ {DadoCliente}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
                 Console.WriteLine("\n Tecle Enter para continuar... ");
                 Console.ReadKey();
             }
@@ -101,16 +102,20 @@ namespace PBancoMorangao
                 switch (operacao)
                 {
                     case 1:
-                        Console.Write("Digite o valor do saque desejado: ");
-                        float saque = float.Parse(Console.ReadLine());
+                        Console.Write("Digite o valor do saque desejado: R$");
+                        float saque;
+                        while (!float.TryParse(Console.ReadLine(), out saque))
+                            Console.WriteLine("Digite somente números!");
                         if (SacarContVIP(saque))
                             AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
                         Console.ReadKey();
                         break;
 
                     case 2:
-                        Console.Write("digite o valor que deseja depositar: ");
-                        float deposito = float.Parse(Console.ReadLine());
+                        Console.Write("digite o valor que deseja depositar: R$");
+                        float deposito;
+                        while (!float.TryParse(Console.ReadLine(), out deposito))
+                            Console.WriteLine("Digite somente números!");
                         try
                         {
                             Depositar(deposito, DadoCliente);
@@ -126,16 +131,22 @@ namespace PBancoMorangao
                         break;
 
                     case 3:
-                        Console.Write("Digite o CPF do Destinatário: ");
+                        Console.Write("Digite o CPF/CNPJ do Destinatário: ");
                         string cpf = Console.ReadLine();
-                        Console.Write("Digite o valor que deseja transferir: ");
-                        float transfere = float.Parse(Console.ReadLine());
+                        float transfere;
+                        Console.Write("Digite o valor que deseja transferir: R$");
+                        while (!float.TryParse(Console.ReadLine(), out transfere))
+                            Console.WriteLine("Digite somente números!");
+
+                       
                         Transferir(cpf, transfere);
                         break;
 
                     case 4:
-                        Console.WriteLine("Digite o valor do Boleto para pagamento: ");
-                        float pagamento = float.Parse(Console.ReadLine());
+                        Console.WriteLine("Digite o valor do Boleto para pagamento: R$");
+                        float pagamento;
+                        while (!float.TryParse(Console.ReadLine(), out pagamento))
+                            Console.WriteLine("Digite somente números!");
                         RealizaPagamento(pagamento);
                         break;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PBancoMorangao
@@ -47,8 +48,18 @@ namespace PBancoMorangao
 
             IdPessoa = id;
 
-            Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
-            Agencia = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Digite o Número da agência [1-Zona Norte / 2-Zona Leste / 3-Zona Sul]: ");
+                Agencia = Console.ReadLine();
+                if(Agencia != "1" && Agencia != "2" && Agencia != "3")
+                {
+                    Console.WriteLine("Agencia inválida!");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                }
+            } while(Agencia != "1" && Agencia != "2" && Agencia != "3" );    
+           
 
             Console.Write("Digite seu nome: ");
             Nome = Console.ReadLine();
@@ -57,20 +68,27 @@ namespace PBancoMorangao
             Telefone = Console.ReadLine();
 
             Console.Write("Digite sua data de nascimento: ");
-            Data = DateTime.Parse(Console.ReadLine());
+            DateTime data;
+            while (!DateTime.TryParse(Console.ReadLine(), out data))
+                Console.WriteLine("Formato de data incorreto!");
+            Data = data;
 
             Console.Write("Digite seu CPF: ");
             CPF = Console.ReadLine();
 
             Console.Write("Informe sua renda: R$");
-            Renda = float.Parse(Console.ReadLine());
+            float renda;
+            while (!float.TryParse(Console.ReadLine(), out renda))
+                Console.WriteLine("Digite somente números!");
+            Renda = renda;
 
-            Console.Write("Estudante? S/N: ");
-            string estudante = Console.ReadLine().ToLower().Trim();
-            if (estudante == "s")
-                Estudante ="s";
-            else
-                Estudante = "s";
+            string estudante;
+            do
+            {
+                Console.Write("Estudante? S/N: ");
+                estudante = Console.ReadLine().ToLower().Trim();
+            } while (estudante != "s" && estudante != "n");
+            Estudante = estudante;
 
             return DadosClientePF();
         }
@@ -84,7 +102,7 @@ namespace PBancoMorangao
             string pessoaPF = CadastraPF(id);
 
             Endereco end = new();
-            string endereco = end.CadastraEndereco(id);
+            string endereco = end.CadastraEndereco();
 
             try
             {
@@ -98,7 +116,7 @@ namespace PBancoMorangao
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e.Message);
+                Console.WriteLine("Erro: " + e.Message);
             }
         }
     }

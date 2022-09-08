@@ -40,8 +40,21 @@ namespace PBancoMorangao
                     int senha = int.Parse(Console.ReadLine());
                     if (Gerente.Autentica(senha))
                     {
-                        Console.WriteLine("Acesso liberado!!!");
-                        Gerente.AprovaConta();
+                        Console.WriteLine("Acesso liberado!!!\n");
+                        string op;
+                        do
+                        {
+                            Console.WriteLine("Digite [1] Para aprovação de conta / [2] Para aprovação de empréstimo");
+                            op = Console.ReadLine();
+                            if(op != "1" && op != "2")
+                                Console.WriteLine("Opção inválida!");
+
+                        } while (op != "1" && op != "2");
+                       
+                        if (op.Contains("1"))
+                            Gerente.AprovaConta();
+                        else
+                            Gerente.AprovaEmprestimo();
                     }
                 }
             }
@@ -64,8 +77,22 @@ namespace PBancoMorangao
                     int senha = int.Parse(Console.ReadLine());
                     if (Gerente.Autentica(senha))
                     {
-                        Console.WriteLine("Acesso liberado!!!");
-                        Gerente.AprovaConta();
+                        Console.WriteLine("Acesso liberado!!!\n");
+                        string op;
+                        do
+                        {
+                            Console.WriteLine("Digite [1] Para aprovação de conta / [2] Para aprovação de empréstimo");
+                            op = Console.ReadLine();
+                            if (op != "1" && op != "2")
+                                Console.WriteLine("Opção inválida!");
+
+                        } while (op != "1" && op != "2");
+
+                        if (op.Contains("s"))
+                            Gerente.AprovaConta();
+                        else
+                            Gerente.AprovaEmprestimo();
+
                     }
                 }
             }
@@ -88,8 +115,21 @@ namespace PBancoMorangao
                     int senha = int.Parse(Console.ReadLine());
                     if (Gerente.Autentica(senha))
                     {
-                        Console.WriteLine("Acesso liberado!!!");
-                        Gerente.AprovaConta();
+                        Console.WriteLine("Acesso liberado!!!\n");
+                        string op;
+                        do
+                        {
+                            Console.WriteLine("Digite [1] Para aprovação de conta / [2] Para aprovação de empréstimo");
+                            op = Console.ReadLine();
+                            if (op != "1" && op != "2")
+                                Console.WriteLine("Opção inválida!");
+
+                        } while (op != "1" && op != "2");
+
+                        if (op.Contains("s"))
+                            Gerente.AprovaConta();
+                        else
+                            Gerente.AprovaEmprestimo();
                     }
                 }
             }

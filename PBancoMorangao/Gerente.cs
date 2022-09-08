@@ -140,8 +140,6 @@ namespace PBancoMorangao
 
                 //Altera o saldo conforme o valor do empréstimo
                 float saldoContaDestino = float.Parse(dados[17]);
-                Console.WriteLine(dados[17]);
-                Console.ReadKey();  
                 float valor = float.Parse(dados[18]);   
                 saldoContaDestino += valor;
                 dados[17] = saldoContaDestino.ToString();
@@ -152,6 +150,8 @@ namespace PBancoMorangao
                     $"{dados[11]};{dados[12]};{dados[13]};{dados[14]};{dados[15]};{dados[16]};{dados[17]};");
                 arqPessoa.Close();
 
+                Console.WriteLine("\nTRANSAÇÃO CONCLUÍDA!!\nPressione Enter para continuar...");
+                Console.ReadKey();
             }
             else
                 return;
