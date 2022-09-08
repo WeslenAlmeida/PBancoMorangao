@@ -52,9 +52,9 @@ namespace PBancoMorangao
                         } while (op != "1" && op != "2");
                        
                         if (op.Contains("1"))
-                            Gerente.AprovaConta();
+                            Gerente.AprovarConta();
                         else
-                            Gerente.AprovaEmprestimo();
+                            Gerente.AprovarEmprestimo();
                     }
                 }
             }
@@ -89,9 +89,9 @@ namespace PBancoMorangao
                         } while (op != "1" && op != "2");
 
                         if (op.Contains("s"))
-                            Gerente.AprovaConta();
+                            Gerente.AprovarConta();
                         else
-                            Gerente.AprovaEmprestimo();
+                            Gerente.AprovarEmprestimo();
 
                     }
                 }
@@ -127,9 +127,9 @@ namespace PBancoMorangao
                         } while (op != "1" && op != "2");
 
                         if (op.Contains("s"))
-                            Gerente.AprovaConta();
+                            Gerente.AprovarConta();
                         else
-                            Gerente.AprovaEmprestimo();
+                            Gerente.AprovarEmprestimo();
                     }
                 }
             }

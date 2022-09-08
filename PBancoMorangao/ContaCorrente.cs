@@ -12,8 +12,8 @@ namespace PBancoMorangao
     {
         public int Numconta { get; set; }
         public float Saldo { get; set; }
-        public PessoaPF Pessoa { get; set; }
-        public PessoaPJ Empresa { get; set; }
+        public ClientePF Pessoa { get; set; }
+        public ClientePJ Empresa { get; set; }
         public Endereco Endereco { get; set; }
         public string DadoCliente { get; set; }
 
@@ -67,7 +67,7 @@ namespace PBancoMorangao
         }
 
         //Método para solicitar empréstimo
-        public void SolicitaEmprestimo(string cpfCnpj)
+        public void SolicitarEmprestimo(string cpfCnpj)
         {
             float valorParcela;
 
@@ -184,6 +184,7 @@ namespace PBancoMorangao
                 Console.WriteLine("6 - Solicitar Empréstimo");
                 Console.WriteLine("0 - Sair");
                 Console.Write("Opção: ");
+
                 while (!int.TryParse(Console.ReadLine(), out opc))
                 {
                     Console.WriteLine("Digite somente números!");

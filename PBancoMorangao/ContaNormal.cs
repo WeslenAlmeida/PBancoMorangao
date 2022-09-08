@@ -22,7 +22,7 @@ namespace PBancoMorangao
             //Verifica se o arquivo é do tipo PF, caso seja ela cria um objeto PF com os dados do arquivo
             if (solicita[0].Contains("Física"))
             {
-                PessoaPF pessoa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], float.Parse(dados[7]), (dados[8]));
+                ClientePF pessoa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], float.Parse(dados[7]), (dados[8]));
                 Pessoa = pessoa;
                 Numconta = int.Parse(dados[0]);
                 DadoCliente = dados[6]; 
@@ -30,7 +30,7 @@ namespace PBancoMorangao
             //Senão cria um objeto do tipo PJ com os dados do arquivo
             else
             {
-                PessoaPJ empresa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], dados[7], float.Parse((dados[8])));
+                ClientePJ empresa = new(int.Parse(dados[0]), dados[2], dados[3], dados[4], DateTime.Parse(dados[5]), dados[6], dados[7], float.Parse((dados[8])));
                 Empresa = empresa;
                 Numconta = int.Parse(dados[0]);
                 DadoCliente = dados[6];
@@ -40,7 +40,7 @@ namespace PBancoMorangao
             Saldo = float.Parse(dados[17]);
             Endereco = end;
         }
-        public bool SacarContNorm(float valor)
+        public bool SacarCNorm(float valor)
         {   //Verifica se o saldo ficar mais que R$ -3000,00 não permite efetuar o método
             if (this.Saldo - valor < -3000)
             {
@@ -61,7 +61,7 @@ namespace PBancoMorangao
         //Método para realizar transferência 
         public void Transferir(string cpfCnpjDestino, float valorSolicitado)
         {
-            if (SacarContNorm(valorSolicitado))
+            if (SacarCNorm(valorSolicitado))
             {
                 Depositar(valorSolicitado, cpfCnpjDestino);
                 AddExtrato(DadoCliente, $"TRANSFERÊNCIA PARA O CPF/CNPJ {cpfCnpjDestino}: {DateTime.Now} ---------- R${valorSolicitado:N2}");
@@ -78,9 +78,9 @@ namespace PBancoMorangao
         }
 
         //Método para realizar pagamentos
-        public void RealizaPagamento(float valor)
+        public void RealizarPagamento(float valor)
         {
-            if (SacarContNorm(valor))
+            if (SacarCNorm(valor))
             {
                 AddExtrato(DadoCliente, $"PAGAMENTO DE CONTA: {DateTime.Now} ---------- R${valor:N2}");
                 Console.WriteLine("\nPagamento realizado com sucesso!!!\n Tecle Enter para continuar... ");
@@ -96,7 +96,7 @@ namespace PBancoMorangao
         }
 
         //Método para realizar as operações da conta
-        public void OperacoesCaixaEletr()
+        public void OperarCaixaEletro()
         {
             int operacao;
             do
@@ -109,7 +109,7 @@ namespace PBancoMorangao
                         float saque;
                         while (!float.TryParse(Console.ReadLine(), out saque))
                             Console.WriteLine("Digite somente números!");
-                        if (SacarContNorm(saque))
+                        if (SacarCNorm(saque))
                             AddExtrato(DadoCliente, $"SAQUE REALIZADO: {DateTime.Now} ---------- R${saque:N2}");
                         break;
 
@@ -147,7 +147,7 @@ namespace PBancoMorangao
                         float pagamento;
                         while (!float.TryParse(Console.ReadLine(), out pagamento))
                             Console.WriteLine("Digite somente números!");
-                        RealizaPagamento(pagamento);
+                        RealizarPagamento(pagamento);
                         break;
 
                     case 5:
@@ -155,7 +155,7 @@ namespace PBancoMorangao
                         break;
 
                     case 6:
-                        SolicitaEmprestimo(DadoCliente);
+                        SolicitarEmprestimo(DadoCliente);
                         break;
 
                     default:

@@ -44,7 +44,7 @@ namespace PBancoMorangao
             return $"{Logradouro};{Numero};{Complemento};{Bairro};{CEP};{Cidade};{Estado};";
         }
         //Método para cadastrar os dados de endereço 
-        public string CadastraEndereco()
+        public string CadastrarEndereco()
         {
             Console.Write("Digite seu logradouro: ");
             Logradouro = Console.ReadLine();
