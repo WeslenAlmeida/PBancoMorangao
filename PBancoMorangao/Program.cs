@@ -101,7 +101,7 @@ namespace PBancoMorangao
                 if (opc == 1)
                 {
                     Console.WriteLine("CADASTRO PESSOA FÍSICA: ");
-                    PessoaPF pf1 = new();
+                    ClientePF pf1 = new();
                     pf1.SolicitaAberturaPF();
                     Console.WriteLine("CADASTRO REALIZADO COM SUCESSO! AGUARDANDO ANÁLISE DE APROVAÇÃO!");
                     Console.WriteLine("Pressione ENTER para retornar ao Menu Principal\n");
@@ -112,7 +112,7 @@ namespace PBancoMorangao
                 else
                 {
                     Console.WriteLine("CADASTRO PESSOA JURIDICA: ");
-                    PessoaPJ pj1 = new();
+                    ClientePJ pj1 = new();
                     pj1.SolicitarAberturaPJ();
                     Console.WriteLine("CADASTRO REALIZADO COM SUCESSO! AGUARDE ANÁLISE DE APROVAÇÃO");
                     Console.WriteLine("Pressione ENTER para retornar ao Menu Principal\n");
@@ -139,21 +139,21 @@ namespace PBancoMorangao
                     if (dados[16].Contains("Normal"))
                     {
                         ContaNormal conta = new(cpfCnpj);
-                        conta.OperacoesCaixaEletr();
+                        conta.OperarCaixaEletro();
                         return;
                     }
                     //Acessa a conta VIP
                     else if (dados[16].Contains("VIP"))
                     {
                         ContaVIP conta = new(cpfCnpj);
-                        conta.OperacoesCaixaEletr();
+                        conta.OperarCaixaEletro();
                         return;
                     }
                     //Acessa a conta Universitária
                     else if (dados[16].Contains("Universitária"))
                     {
                         CCUniversitaria conta = new(cpfCnpj);
-                        conta.OperacoesCaixaEletr();
+                        conta.OperarCaixaEletro();
                         return;
                     }
                 }catch(Exception e)

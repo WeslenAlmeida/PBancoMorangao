@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace PBancoMorangao
 {
-    internal class PessoaPF : Pessoa
+    internal class ClientePF : Pessoa
     {
         private string CPF { get; set; }
         private float Renda { get; set; }
         private string Estudante { get; set; }
 
-        public PessoaPF()
+        public ClientePF()
         {
 
         }
-        public PessoaPF(int id, string nome, string agencia, string telefone, DateTime data, string cpf, float renda, string estudante)
+        public ClientePF(int id, string nome, string agencia, string telefone, DateTime data, string cpf, float renda, string estudante)
         {
             IdPessoa = id;
             Agencia = agencia;  
@@ -97,12 +97,12 @@ namespace PBancoMorangao
         public void SolicitaAberturaPF()
         {
             
-            int id = getID();
+            int id = GetID();
 
             string pessoaPF = CadastraPF(id);
 
             Endereco end = new();
-            string endereco = end.CadastraEndereco();
+            string endereco = end.CadastrarEndereco();
 
             try
             {

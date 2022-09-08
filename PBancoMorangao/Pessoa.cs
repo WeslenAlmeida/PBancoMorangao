@@ -16,7 +16,7 @@ namespace PBancoMorangao
         public string Agencia { get; set; }
 
         //Método para pegar o valor do Id no arquivo
-        protected int getID()
+        protected int GetID()
         {
             string[] contador = System.IO.File.ReadAllLines($"C:\\Users\\wessm\\source\\repos\\PBancoMorangao\\IdsContr\\ProxId.txt");
             string[] num = new string[1];  

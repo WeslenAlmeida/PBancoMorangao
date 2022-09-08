@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace PBancoMorangao
 {
-    internal class PessoaPJ : Pessoa
+    internal class ClientePJ : Pessoa
     {
         private string Razao { get; set; }
         private string CNPJ { get; set; }
         private float Renda { get; set; }
 
-        public PessoaPJ()
+        public ClientePJ()
         {
 
         }
-        public PessoaPJ(int id, string agencia, string nome, string telefone, DateTime data, string razao, string cnpj, float renda)
+        public ClientePJ(int id, string agencia, string nome, string telefone, DateTime data, string razao, string cnpj, float renda)
         {
             IdPessoa = id;
             Agencia = agencia;
@@ -42,7 +42,7 @@ namespace PBancoMorangao
         }
 
         //Método para receber os dados do usuário
-        public string CadastraPJ(int id)
+        public string CadastrarPJ(int id)
         {
             Console.WriteLine("***************************** BANCO MORANGÃO ********************************\n");
             Console.WriteLine("********** SOLICITAÇÃO DE ABERTURA DE CONTA PESSOA JURÍDICA **********\n");
@@ -91,11 +91,11 @@ namespace PBancoMorangao
         public void SolicitarAberturaPJ()
         {
 
-            int id = getID();
-            string pessoaPJ = CadastraPJ(id);
+            int id = GetID();
+            string pessoaPJ = CadastrarPJ(id);
 
             Endereco end = new();
-            string endereco = end.CadastraEndereco();
+            string endereco = end.CadastrarEndereco();
 
             try
             {

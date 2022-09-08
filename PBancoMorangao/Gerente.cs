@@ -24,7 +24,7 @@ namespace PBancoMorangao
             return false;
         }
 
-        public void AprovaConta()
+        public void AprovarConta()
         {
             //Verifica a quantidade de solicitações
             List<string> solicitacoes = new List<string>();
@@ -84,7 +84,7 @@ namespace PBancoMorangao
 
 
         }
-        public void AprovaEmprestimo()
+        public void AprovarEmprestimo()
         {
             //Verifica a quantidade de solicitações
             List<string> solicitacoes = new List<string>();
